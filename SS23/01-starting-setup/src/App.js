@@ -23,6 +23,16 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  /* JSX format would be the following (you would need to import react from react)
+    return React.createElement(
+      'div',
+      {},
+      React.createElemnt('h2', {}, "Let's get this started!"),
+      React.createElement(Expenses, { items: expenses})
+    );
+  */
+
   return (
     <div>
       <h2>Let's get started!</h2>
