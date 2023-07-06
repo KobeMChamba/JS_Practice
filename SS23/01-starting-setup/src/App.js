@@ -1,6 +1,6 @@
 // import ExpenseItem from "./components/ExpenseItem";
 import Expenses from "./components/Expenses";
-
+ 
 // An alt function syntax: const App = () => {...
 function App() {
   const expenses = [
