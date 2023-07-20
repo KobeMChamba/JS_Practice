@@ -42,9 +42,10 @@ const StackedBarChart = () => {
   ];
 
   const categories = data.map(item => item.category);
-  const budgetData = data.map(item => (item.budget-item.expense));
+  const budgetData = data.map(item => (item.budget - item.expense));
   const expenseData = data.map(item => item.expense);
 
+  const chartSeries = [];
   const chartOptions = {
     chart: {
       type: 'bar',
@@ -72,16 +73,27 @@ const StackedBarChart = () => {
     },
   };
 
-  const chartSeries = [
-    {
-      name: 'Expense',
-      data: expenseData,
-    },
-    {
-        name: 'Remaining Budget',
-        data: budgetData,
-      },
-  ];
+  data.forEach(item => {
+    if (item.expense <= item.budget) {
+      chartSeries.push({
+        name: 'Expenses within Budget',
+        data: [item.expense, 0],
+      });
+      chartSeries.push({
+        name: 'Expenses over Budget',
+        data: [0, item.budget - item.expense],
+      });
+    } else {
+      chartSeries.push({
+        name: 'Expenses within Budget',
+        data: [item.budget, item.expense - item.budget],
+      });
+      chartSeries.push({
+        name: 'Expenses over Budget',
+        data: [0, 0],
+      });
+    }
+  });
 
   return (
     <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto' }}>
